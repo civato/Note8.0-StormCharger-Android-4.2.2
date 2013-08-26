@@ -468,6 +468,12 @@ config EXYNOS4_CPUFREQ
 	help
 	  Exynos4 cpufreq support
 
+config CPU_OVERCLOCK
+	bool "Enable CPU Overclocking option"
+	default n
+	help
+	  Exynos4 overclocking up to 1.90 GHz
+
 config EXYNOS5_CPUFREQ
 	def_bool y
 	depends on CPU_FREQ && ARCH_EXYNOS5
@@ -2118,3 +2124,9 @@ config MACH_GD2_SENSOR
 	  K330 / STM
 	  AK8963 / AKM
 	  CM36651 / CAPELLA
+
+config ABB_CONTROL
+	bool "Adaptive body bias control"
+	depends on EXYNOS4_CPUFREQ && CPU_EXYNOS4412
+	default y
+

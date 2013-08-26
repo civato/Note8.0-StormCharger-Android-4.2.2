@@ -116,6 +116,8 @@ struct exynos_dvfs_info {
 #ifdef CONFIG_SLP
 	struct dvfs_qos_info *cpu_dma_latency;
 #endif
+	unsigned int	max_current_idx;
+	unsigned int	min_current_idx;
 };
 
 extern struct exynos_dvfs_info *exynos_info;

@@ -701,4 +701,13 @@ config SLP_PROCESS_MON
 	  Providing monitoring important processes. Users can register the process
 	  with sysfs.
 
+config CPU_UNDERVOLTING
+	tristate "Several undervolting interfaces"
+	default y
+
+config MALI_CONTROL
+	tristate "mali gpu control interfaces"
+	depends on MALI_400MP_UMP
+	default y
 endif # MISC_DEVICES
+
