@@ -1193,29 +1193,6 @@ static int mmc_init_card(struct mmc_host *host, u32 ocr,
 			goto free_card;
 	}
 
-	/*
-	 * Ensure eMMC boot partition Write protection
-	 */
-	err = mmc_switch(card, EXT_CSD_CMD_SET_NORMAL,
-			EXT_CSD_BOOT_WP,
-			EXT_CSD_BOOT_WP_PERM_WP_DIS | EXT_CSD_BOOT_WP_PWR_WP_EN,
-			card->ext_csd.part_time);
-	if (err && err != -EBADMSG)
-		goto free_card;
-
-	/*
-	 * Ensure eMMC boot config is protected.
-	 */
-	if (!(card->ext_csd.boot_part_prot & (0x1<<4)) &&
-		!(card->ext_csd.boot_part_prot & (0x1<<0))) {
-		card->ext_csd.boot_part_prot |= (0x1<<0);
-		err = mmc_switch(card, EXT_CSD_CMD_SET_NORMAL,
-				 EXT_CSD_BOOT_CONFIG_PROT,
-				 card->ext_csd.boot_part_prot,
-				 card->ext_csd.part_time);
-		if (err && err != -EBADMSG)
-			goto free_card;
-	}
 
 	/*
 	 * If the host supports the power_off_notify capability then
